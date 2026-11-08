@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10131b">
+<title>Golden Multi Service — GMS</title>
+<style>
+:root{--bg:#0e1118;--panel:#171c27;--panel2:#202838;--gold:#e3b84f;--blue:#2879c7;--green:#36a477;--text:#f5f6f8;--muted:#aab3c2;--line:#30394a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
+aside{background:#121722;border-right:1px solid var(--line);padding:22px 15px;display:flex;flex-direction:column;gap:18px}
+.brand{padding:8px 10px 20px;border-bottom:1px solid var(--line)}.brand b{display:block;color:var(--gold);font-size:20px;letter-spacing:.5px}.brand small{color:var(--muted)}
+nav{display:grid;gap:7px}nav button{border:0;text-align:left;color:#d9deea;background:transparent;padding:12px;border-radius:10px}nav button.active,nav button:hover{background:var(--panel2);color:var(--gold)}
+.admin-note{margin-top:auto;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12px}
+main{padding:24px;max-width:1400px;width:100%;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.top h1{margin:0;font-size:25px}.top p{margin:4px 0 0;color:var(--muted)}.actions{display:flex;gap:8px;align-items:center}
+select,.field,input{background:#101722;color:var(--text);border:1px solid var(--line);padding:10px 12px;border-radius:9px;min-width:0}
+.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:650;background:var(--gold);color:#171717}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.btn.danger{background:#8f3942;color:white}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:17px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:7px}.stat .ico{font-size:21px;color:var(--gold)}
+.section{margin-top:22px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.section h2{font-size:18px;margin:0}.muted{color:var(--muted)}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:650px;background:var(--panel)}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}tr:last-child td{border:0}
+.tag{display:inline-block;border-radius:30px;padding:4px 9px;font-size:12px;background:#344055;color:#dce5f4}.tag.ok{background:#174d3d;color:#8ce0bc}.tag.wait{background:#59451d;color:#f4d27b}.tag.no{background:#5a2930;color:#ffadb5}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.toolbar input{flex:1;min-width:180px}
+.empty{padding:25px;text-align:center;color:var(--muted)}
+.modal-bg{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-bg.show{display:flex}.modal{width:min(500px,100%);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}.modal h3{margin:0 0 15px}.form{display:grid;gap:11px}.form label{display:grid;gap:5px;color:var(--muted);font-size:13px}.form input,.form select{width:100%}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.notice{border-left:3px solid var(--gold);background:#28251d;color:#f3dfaa;padding:12px 14px;border-radius:8px;font-size:13px;margin-top:18px}
+.mobile-head{display:none}
+@media(max-width:900px){.app{grid-template-columns:1fr}aside{padding:10px 12px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:4px 6px 10px}.brand b{font-size:17px}nav{display:flex;overflow:auto;gap:5px}nav button{white-space:nowrap;padding:9px 11px;font-size:13px}.admin-note{display:none}main{padding:18px 13px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.top h1{font-size:21px}}
+@media(max-width:420px){.top{align-items:flex-start;flex-direction:column}.actions{width:100%;justify-content:space-between}.grid{gap:9px}.card{padding:13px}.stat strong{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><b>✦ GOLDEN MULTI SERVICE</b><small>La Flè • GMS Admin</small></div>
+  <nav id="nav">
+    <button class="active" data-page="dashboard">⌂ <span data-i18n="dashboard">Tablodbò</span></button>
+    <button data-page="businesses">▣ <span data-i18n="businesses">Biznis</span></button>
+    <button data-page="products">◇ <span data-i18n="products">Pwodwi</span></button>
+    <button data-page="orders">🛒 <span data-i18n="orders">Kòmand</span></button>
+    <button data-page="customers">♙ <span data-i18n="customers">Kliyan</span></button>
+    <button data-page="admins">♧ <span data-i18n="admins">Administratè</span></button>
+    <button data-page="payments">＄ <span data-i18n="payments">Peman</span></button>
+  </nav>
+  <div class="admin-note">🔐 <b>Administratè prensipal</b><br>Ou gen tout kontwòl sou anviwònman demonstrasyon sa a.</div>
+</aside>
+<main>
+  <div class="top">
+    <div><h1 id="pageTitle">Tablodbò prensipal</h1><p id="pageSubtitle">Byenveni nan espas jesyon GMS la.</p></div>
+    <div class="actions"><select id="language" aria-label="Language"><option value="ht">Kreyòl</option><option value="fr">Français</option><option value="en">English</option></select><button class="btn secondary" id="addBtn">＋ Ajoute</button></div>
+  </div>
+  <div id="content"></div>
+  <div class="notice" id="disclaimer">Vèsyon demonstrasyon: done yo rete sou aparèy/navigatè sa a. Koneksyon reyèl, bazdone sou entènèt, verifikasyon idantite ak tranzaksyon MonCash/NatCash poko aktive.</div>
+</main>
+</div>
+<div class="modal-bg" id="modalBg"><div class="modal"><h3 id="modalTitle">Ajoute</h3><div class="form" id="modalForm"></div><div class="modal-actions"><button class="btn secondary" id="cancelModal">Anile</button><button class="btn" id="saveModal">Anrejistre</button></div></div></div>
+<script>
+const translations={
+ht:{dashboard:"Tablodbò",businesses:"Biznis",products:"Pwodwi",orders:"Kòmand",customers:"Kliyan",admins:"Administratè",payments:"Peman",welcome:"Byenveni nan espas jesyon GMS la.",add:"＋ Ajoute",businessTitle:"Jesyon biznis",productTitle:"Jesyon pwodwi",orderTitle:"Jesyon kòmand",customerTitle:"Jesyon kliyan",adminTitle:"Jesyon administratè",paymentTitle:"Metòd peman",search:"Chèche...",name:"Non",status:"Estati",category:"Kategori",price:"Pri (HTG)",stock:"Kantite",business:"Biznis",customer:"Kliyan",method:"Metòd",total:"Total",role:"Wòl",permissions:"Otorizasyon",save:"Anrejistre",cancel:"Anile",pending:"An atant",approved:"Apwouve",rejected:"Refize",suspended:"Sispann",processing:"Ap prepare",delivered:"Livre",cancelled:"Anile",serviceAdmin:"Administratè sèvis",financeAdmin:"Administratè finans",fullAdmin:"Administratè konplè",mainAdmin:"Administratè prensipal",noData:"Pa gen done pou montre.",businessCount:"Biznis anrejistre",productCount:"Pwodwi",orderCount:"Kòmand",customerCount:"Kliyan",recent:"Dènye aktivite",approve:"Apwouve",reject:"Refize",suspend:"Sispann",newOrder:"Nouvo kòmand",newBusiness:"Nouvo biznis",newProduct:"Nouvo pwodwi",newAdmin:"Envite administratè",paymentInfo:"MonCash, NatCash ak peman kach disponib kòm opsyon nan plan GMS la."},
+fr:{dashboard:"Tableau de bord",businesses:"Entreprises",products:"Produits",orders:"Commandes",customers:"Clients",admins:"Administrateurs",payments:"Paiements",welcome:"Bienvenue dans l’espace de gestion GMS.",add:"＋ Ajouter",businessTitle:"Gestion des entreprises",productTitle:"Gestion des produits",orderTitle:"Gestion des commandes",customerTitle:"Gestion des clients",adminTitle:"Gestion des administrateurs",paymentTitle:"Moyens de paiement",search:"Rechercher...",name:"Nom",status:"Statut",category:"Catégorie",price:"Prix (HTG)",stock:"Stock",business:"Entreprise",customer:"Client",method:"Méthode",total:"Total",role:"Rôle",permissions:"Autorisations",save:"Enregistrer",cancel:"Annuler",pending:"En attente",approved:"Approuvée",rejected:"Refusée",suspended:"Suspendue",processing:"En préparation",delivered:"Livrée",cancelled:"Annulée",serviceAdmin:"Administrateur services",financeAdmin:"Administrateur finances",fullAdmin:"Administrateur complet",mainAdmin:"Administrateur principal",noData:"Aucune donnée à afficher.",businessCount:"Entreprises inscrites",productCount:"Produits",orderCount:"Commandes",customerCount:"Clients",recent:"Activité récente",approve:"Approuver",reject:"Refuser",suspend:"Suspendre",newOrder:"Nouvelle commande",newBusiness:"Nouvelle entreprise",newProduct:"Nouveau produit",newAdmin:"Inviter un administrateur",paymentInfo:"MonCash, NatCash et paiement en espèces sont prévus dans le plan GMS."},
+en:{dashboard:"Dashboard",businesses:"Businesses",products:"Products",orders:"Orders",customers:"Customers",admins:"Administrators",payments:"Payments",welcome:"Welcome to the GMS management space.",add:"＋ Add",businessTitle:"Business management",productTitle:"Product management",orderTitle:"Order management",customerTitle:"Customer management",adminTitle:"Administrator management",paymentTitle:"Payment methods",search:"Search...",name:"Name",status:"Status",category:"Category",price:"Price (HTG)",stock:"Stock",business:"Business",customer:"Customer",method:"Method",total:"Total",role:"Role",permissions:"Permissions",save:"Save",cancel:"Cancel",pending:"Pending",approved:"Approved",rejected:"Rejected",suspended:"Suspended",processing:"Processing",delivered:"Delivered",cancelled:"Cancelled",serviceAdmin:"Service administrator",financeAdmin:"Finance administrator",fullAdmin:"Full administrator",mainAdmin:"Main administrator",noData:"No data to display.",businessCount:"Registered businesses",productCount:"Products",orderCount:"Orders",customerCount:"Customers",recent:"Recent activity",approve:"Approve",reject:"Reject",suspend:"Suspend",newOrder:"New order",newBusiness:"New business",newProduct:"New product",newAdmin:"Invite administrator",paymentInfo:"MonCash, NatCash and cash payment are planned GMS options."}
+};
+let lang="ht",page="dashboard";
+let db={
+businesses:[{name:"Egzanp Telefòn Plus",category:"Reparasyon telefòn",status:"pending"},{name:"Akseswa Lakay",category:"Akseswa",status:"approved"}],
+products:[{name:"Chajè USB-C",business:"Akseswa Lakay",price:750,stock:12},{name:"Kouvèti telefòn",business:"Akseswa Lakay",price:350,stock:20}],
+orders:[{customer:"Jean Pierre",business:"Akseswa Lakay",total:1100,method:"MonCash",status:"processing"}],
+customers:[{name:"Jean Pierre",contact:"47100000"},{name:"Marie Louis",contact:"35000000"}],
+admins:[{name:"Ou menm",email:"pwopriyetè@gms.ht",role:"main"}]
+};
+const $=s=>document.querySelector(s), t=k=>translations[lang][k]||k;
+function setPage(p){page=p;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===p));render()}
+function titleFor(){return ({dashboard:t("dashboard"),businesses:t("businessTitle"),products:t("productTitle"),orders:t("orderTitle"),customers:t("customerTitle"),admins:t("adminTitle"),payments:t("paymentTitle")})[page]}
+function statusLabel(s){return t(s)||s}
+function tag(s){let c=["approved","delivered"].includes(s)?"ok":["pending","processing"].includes(s)?"wait":"no";return `<span class="tag ${c}">${statusLabel(s)}</span>`}
+function table(headers,rows){if(!rows.length)return `<div class="empty">${t("noData")}</div>`;return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`}
+function render(){
+$("#pageTitle").textContent=titleFor();$("#pageSubtitle").textContent=t("welcome");$("#addBtn").style.display=page==="dashboard"||page==="payments"?"none":"inline-block";$("#addBtn").textContent=t("add");
+let c="";
+if(page==="dashboard"){
+c=`<div class="grid">
+<div class="card stat"><span class="ico">▣</span><small>${t("businessCount")}</small><strong>${db.businesses.length}</strong></div>
+<div class="card stat"><span class="ico">◇</span><small>${t("productCount")}</small><strong>${db.products.length}</strong></div>
+<div class="card stat"><span class="ico">🛒</span><small>${t("orderCount")}</small><strong>${db.orders.length}</strong></div>
+<div class="card stat"><span class="ico">♙</span><small>${t("customerCount")}</small><strong>${db.customers.length}</strong></div></div>
+<div class="section"><div class="section-head"><h2>${t("recent")}</h2></div>${table([t("name"),t("category"),t("status")],db.businesses.slice(-5).map(x=>`<tr><td>${x.name}</td><td>${x.category}</td><td>${tag(x.status)}</td></tr>`))}</div>`;
+}
+if(page==="businesses"){c=`<div class="toolbar"><input id="filter" placeholder="${t("search")}"></div><div id="tableArea">${businessTable()}</div>`}
+if(page==="products"){c=`<div class="toolbar"><input id="filter" placeholder="${t("search")}"></div><div id="tableArea">${productTable()}</div>`}
+if(page==="orders"){c=`<div class="toolbar"><input id="filter" placeholder="${t("search")}"></div><div id="tableArea">${orderTable()}</div>`}
+if(page==="customers"){c=table([t("name"),"Kontak"],db.customers.map(x=>`<tr><td>${x.name}</td><td>${x.contact}</td></tr>`))}
+if(page==="admins"){c=table([t("name"),"Email",t("role"),t("permissions")],db.admins.map(x=>`<tr><td>${x.name}</td><td>${x.email}</td><td>${x.role==="main"?t("mainAdmin"):t(x.role)}</td><td>${x.role==="serviceAdmin"?"Biznis, pwodwi, kòmand":x.role==="financeAdmin"?"Peman, rapò finansye":"Tout dwa"}</td></tr>`))}
+if(page==="payments"){c=`<div class="grid"><div class="card"><h3>MonCash</h3><span class="tag wait">Pou konfigire</span></div><div class="card"><h3>NatCash</h3><span class="tag wait">Pou konfigire</span></div><div class="card"><h3>Peman kach</h3><span class="tag ok">Opsyon planifye</span></div></div><div class="notice">${t("paymentInfo")}</div>`}
+$("#content").innerHTML=c;
+const f=$("#filter");if(f)f.addEventListener("input",()=>{let q=f.value.toLowerCase();let area=$("#tableArea");area.innerHTML=page==="businesses"?businessTable(q):page==="products"?productTable(q):orderTable(q);wireActions()});
+wireActions();
+}
+function businessTable(q=""){let a=db.businesses.filter(x=>(x.name+x.category).toLowerCase().includes(q));return table([t("name"),t("category"),t("status"),"Aksyon"],a.map((x)=>`<tr><td>${x.name}</td><td>${x.category}</td><td>${tag(x.status)}</td><td><select class="status-change" data-name="${x.name}"><option value="">Chanje estati</option><option value="approved">${t("approve")}</option><option value="rejected">${t("reject")}</option><option value="suspended">${t("suspend")}</option></select></td></tr>`))}
+function productTable(q=""){let a=db.products.filter(x=>(x.name+x.business).toLowerCase().includes(q));return table([t("name"),t("business"),t("price"),t("stock")],a.map(x=>`<tr><td>${x.name}</td><td>${x.business}</td><td>${Number(x.price).toLocaleString()} HTG</td><td>${x.stock}</td></tr>`))}
+function orderTable(q=""){let a=db.orders.filter(x=>(x.customer+x.business+x.method).toLowerCase().includes(q));return table([t("customer"),t("business"),t("total"),t("method"),t("status"),"Aksyon"],a.map(x=>`<tr><td>${x.customer}</td><td>${x.business}</td><td>${Number(x.total).toLocaleString()} HTG</td><td>${x.method}</td><td>${tag(x.status)}</td><td><select class="order-change" data-customer="${x.customer}"><option value="">Chanje estati</option><option value="processing">Ap prepare</option><option value="delivered">${t("delivered")}</option><option value="cancelled">${t("cancelled")}</option></select></td></tr>`))}
+function wireActions(){document.querySelectorAll(".status-change").forEach(s=>s.onchange=()=>{let b=db.businesses.find(x=>x.name===s.dataset.name);if(b&&s.value)b.status=s.value;render()});document.querySelectorAll(".order-change").forEach(s=>s.onchange=()=>{let o=db.orders.find(x=>x.customer===s.dataset.customer);if(o&&s.value)o.status=s.value;render()})}
+function openModal(){let fields={businesses:[["name","Non biznis"],["category","Kategori"]],products:[["name","Non pwodwi"],["business","Biznis"],["price","Pri HTG"],["stock","Kantite"]],orders:[["customer","Non kliyan"],["business","Biznis"],["total","Total HTG"],["method","Metòd peman"]],customers:[["name","Non kliyan"],["contact","Telefòn"]],admins:[["name","Non"],["email","Imel"],["role","Wòl"]]};let defs=fields[page];if(!defs)return;$("#modalTitle").textContent=({businesses:t("newBusiness"),products:t("newProduct"),orders:t("newOrder"),admins:t("newAdmin"),customers:"Nouvo kliyan"})[page];$("#modalForm").innerHTML="<form id=\"entryForm\" class=\"form\">"+defs.map(([k,label])=>`<label>${label}${k==="role"?`<select name="${k}"><option value="serviceAdmin">${t("serviceAdmin")}</option><option value="financeAdmin">${t("financeAdmin")}</option><option value="fullAdmin">${t("fullAdmin")}</option></select>`:k==="method"?`<select name="${k}"><option>MonCash</option><option>NatCash</option><option>Peman kach</option></select>`:`<input name="${k}" ${["price","stock","total"].includes(k)?'type="number" min="0"':'type="text"'} required>`}</label>`).join("")+"</form>";$("#modalBg").classList.add("show")}
+function saveModal(){let data={};new FormData($("#entryForm")).forEach((v,k)=>data[k]=v);if(!Object.values(data).every(v=>String(v).trim()))return alert("Tanpri ranpli tout chan yo.");if(page==="businesses")db.businesses.push({...data,status:"pending"});if(page==="products")db.products.push({...data,price:Number(data.price),stock:Number(data.stock)});if(page==="orders")db.orders.push({...data,total:Number(data.total),status:"pending"});if(page==="customers")db.customers.push(data);if(page==="admins")db.admins.push(data);$("#modalBg").classList.remove("show");render()}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>setPage(b.dataset.page)));
+$("#language").addEventListener("change",e=>{lang=e.target.value;document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));render()});
+$("#addBtn").addEventListener("click",openModal);$("#cancelModal").addEventListener("click",()=>$("#modalBg").classList.remove("show"));$("#saveModal").addEventListener("click",saveModal);
+render();
+try{const saved=localStorage.getItem("gms_demo_data");if(saved){db=JSON.parse(saved);render()}}catch(e){}
+const oldRender=render;render=function(){oldRender();try{localStorage.setItem("gms_demo_data",JSON.stringify(db))}catch(e){}};
+</script>
+</body></html>
